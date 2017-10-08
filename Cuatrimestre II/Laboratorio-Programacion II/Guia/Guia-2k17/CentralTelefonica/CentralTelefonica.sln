@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentralTelefonica", "CentralTelefonica\CentralTelefonica.csproj", "{2DF7D828-E1ED-4A9E-833D-73B9359BB302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{6C9B7DAF-04FC-4200-99EC-332FC6687211}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DF7D828-E1ED-4A9E-833D-73B9359BB302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DF7D828-E1ED-4A9E-833D-73B9359BB302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DF7D828-E1ED-4A9E-833D-73B9359BB302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DF7D828-E1ED-4A9E-833D-73B9359BB302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C9B7DAF-04FC-4200-99EC-332FC6687211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C9B7DAF-04FC-4200-99EC-332FC6687211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C9B7DAF-04FC-4200-99EC-332FC6687211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C9B7DAF-04FC-4200-99EC-332FC6687211}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
