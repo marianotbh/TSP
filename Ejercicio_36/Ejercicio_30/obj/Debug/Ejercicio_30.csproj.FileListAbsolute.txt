@@ -1,0 +1,9 @@
+D:\VisualStudio\Ejercicio_30\Ejercicio_30\bin\Debug\Ejercicio_30.exe.config
+D:\VisualStudio\Ejercicio_30\Ejercicio_30\bin\Debug\Ejercicio_30.exe
+D:\VisualStudio\Ejercicio_30\Ejercicio_30\bin\Debug\Ejercicio_30.pdb
+D:\VisualStudio\Ejercicio_30\Ejercicio_30\obj\Debug\Ejercicio_30.csprojResolveAssemblyReference.cache
+D:\VisualStudio\Ejercicio_30\Ejercicio_30\obj\Debug\Ejercicio_30.exe
+D:\VisualStudio\Ejercicio_30\Ejercicio_30\obj\Debug\Ejercicio_30.pdb
+D:\VisualStudio\Ejercicio_36\Ejercicio_30\bin\Debug\Ejercicio_30.exe.config
+D:\VisualStudio\Ejercicio_36\Ejercicio_30\obj\Debug\Ejercicio_30.exe
+D:\VisualStudio\Ejercicio_36\Ejercicio_30\obj\Debug\Ejercicio_30.pdb
