@@ -1,0 +1,89 @@
+# depslib dependency file v1.0
+1498035738 source:c:\facu\programacion i\tps\tp3\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+	"Validaciones/validaciones.h"
+
+1498034063 c:\facu\programacion i\tps\tp3\funciones.h
+
+1495431890 c:\facu\programacion i\tps\tp3\validaciones\validaciones.h
+
+1498035772 source:c:\facu\programacion i\tps\tp3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1496439351 source:c:\facu\programacion i\tps\tp3\validaciones\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1498677259 source:c:\git\tsp\cuatrimestre i\programacion i\tps\tp3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1498679057 c:\git\tsp\cuatrimestre i\programacion i\tps\tp3\funciones.h
+
+1498678558 source:c:\git\tsp\cuatrimestre i\programacion i\tps\tp3\validaciones\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1498678398 source:c:\git\tsp\cuatrimestre i\programacion i\tps\tp3\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+	"Validaciones/validaciones.h"
+
+1495431890 c:\git\tsp\cuatrimestre i\programacion i\tps\tp3\validaciones\validaciones.h
+
+1498678398 source:c:\users\mariano\documents\github\cuatrimestre i\programacion i\tps\tp3\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+	"Validaciones/validaciones.h"
+
+1498679057 c:\users\mariano\documents\github\cuatrimestre i\programacion i\tps\tp3\funciones.h
+
+1495431890 c:\users\mariano\documents\github\cuatrimestre i\programacion i\tps\tp3\validaciones\validaciones.h
+
+1498677259 source:c:\users\mariano\documents\github\cuatrimestre i\programacion i\tps\tp3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1498678558 source:c:\users\mariano\documents\github\cuatrimestre i\programacion i\tps\tp3\validaciones\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1498678400 source:d:\tsp\cuatrimestre i\programacion i\tps\tp3\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+	"Validaciones/validaciones.h"
+
+1498679058 d:\tsp\cuatrimestre i\programacion i\tps\tp3\funciones.h
+
+1495431892 d:\tsp\cuatrimestre i\programacion i\tps\tp3\validaciones\validaciones.h
+
+1498677260 source:d:\tsp\cuatrimestre i\programacion i\tps\tp3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1498678560 source:d:\tsp\cuatrimestre i\programacion i\tps\tp3\validaciones\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
