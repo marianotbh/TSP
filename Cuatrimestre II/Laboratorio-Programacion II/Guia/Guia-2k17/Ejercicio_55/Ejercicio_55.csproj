@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{283EAB22-C8D2-44E8-BD13-0A12FD488432}</ProjectGuid>
+    <ProjectGuid>{0C69BDBA-1B58-42A5-8BE1-18747E2A28EC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
-    <AssemblyName>WindowsFormsApplication1</AssemblyName>
+    <RootNamespace>Ejercicio_55</RootNamespace>
+    <AssemblyName>Ejercicio_55</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -76,12 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="E:\TSP\Cuatrimestre II\Laboratorio II\Guia\Ejercicio22\ConsoleApplication1\ConsoleApplication1.csproj">
-      <Project>{2edc945e-ef38-4ae7-8317-78812e0b1415}</Project>
-      <Name>ConsoleApplication1</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
