@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1497651758 source:d:\final\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1497651758 d:\final\arraylist.h
+
+1501200684 source:d:\final\menu.c
+	<stdio.h>
+	<stdlib.h>
+	"controller.h"
+	"arrayList.h"
+
+1498678560 source:d:\final\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1501191049 source:d:\final\main.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
+1501198098 d:\final\menu.h
+
+1501199400 source:d:\final\nota.c
+	"nota.h"
+
+1501197692 d:\final\nota.h
+	<stdio.h>
+	<stdlib.h>
+	"arrayList.h"
+
+1501199400 source:d:\final\melodias.c
+	"melodias.h"
+
+1501198001 d:\final\melodias.h
+	<stdio.h>
+	<stdlib.h>
+	"arrayList.h"
+
+1501200666 source:d:\final\controller.c
+	<stdio.h>
+	<stdlib.h>
+	"controller.h"
+
+1501200792 d:\final\controller.h
+	"arrayList.h"
+	"nota.h"
+	"melodias.h"
+

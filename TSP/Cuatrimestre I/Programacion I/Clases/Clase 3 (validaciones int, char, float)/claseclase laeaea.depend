@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1490313949 source:d:\claseclase laeaea\main.c
+	<stdio.h>
+	<stdlib.h>
+	"misBibliotecas.h"
+
+1490313888 d:\claseclase laeaea\misbibliotecas.h
+

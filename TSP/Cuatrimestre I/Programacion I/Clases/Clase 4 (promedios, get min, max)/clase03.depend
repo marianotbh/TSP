@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1490826439 source:d:\facu\clase03\bibliotecapedirnumero.c
+
+1490835182 source:d:\facu\clase03\bibliotecaprom.c
+	<stdio.h>
+	<stdlib.h>
+
+1490835282 source:d:\facu\clase03\main.c
+	<stdio.h>
+	<stdlib.h>
+	"bibliotecaProm.h"
+
+1490834835 d:\facu\clase03\bibliotecaprom.h
+

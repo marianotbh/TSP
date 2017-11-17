@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Primer Parcial" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Primer Parcial" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Primer Parcial" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Libs/ArrayList/ArrayList.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libs/ArrayList/ArrayList.h" />
+		<Unit filename="Libs/Controller/controller.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libs/Controller/controller.h" />
+		<Unit filename="Libs/Entidades/producto.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libs/Entidades/producto.h" />
+		<Unit filename="Libs/Entidades/usuario.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libs/Entidades/usuario.h" />
+		<Unit filename="Libs/Menu/Untitled1.ads" />
+		<Unit filename="Libs/Menu/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libs/Menu/menu.h" />
+		<Unit filename="Libs/Ordenadores/libs_Ordenadores.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libs/Ordenadores/libs_Ordenadores.h" />
+		<Unit filename="Libs/Validaciones/libs_Validaciones.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libs/Validaciones/libs_Validaciones.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

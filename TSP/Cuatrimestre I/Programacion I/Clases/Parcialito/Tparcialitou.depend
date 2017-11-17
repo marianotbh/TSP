@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1492718735 source:c:\facu\proyectos\tparcialitou\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1492718059 c:\facu\proyectos\tparcialitou\funciones.h
+

@@ -1,0 +1,18 @@
+miércoles, 8 de noviembre de 2017 12:46 a. m. -- Se realizó una llamada.
+Central: Fede Center
+
+Ganancias por el total de las llamadas: 189,84
+Ganancias por llamadas locales: 169,05
+Ganancias por llamadas provinciales20,79
+
+Detalle de llamadas:
+Llamada desde Bernal hacia Rosario con duración de 30 minutos
+Costo de la llamada: 79,5
+
+Llamada desde Morón hacia Bernal con duración de 21 minutos
+Costo de llamada dentro de la Franja_1: 20,79
+
+Llamada desde Lanús hacia San Rafael con duración de 45 minutos
+Costo de la llamada: 89,55
+
+

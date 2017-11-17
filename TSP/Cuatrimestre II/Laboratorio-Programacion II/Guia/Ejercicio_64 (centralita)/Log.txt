@@ -1,0 +1,36 @@
+miércoles, 08 de noviembre de 2017 22:08 -- Se realizó una llamada.
+Central: Fede Center
+
+Ganancias por el total de las llamadas: 5138,94
+Ganancias por llamadas locales: 4677
+Ganancias por llamadas provinciales: 461,94
+
+Detalle de llamadas:
+Llamada desde Origen1 hacia Origen1 con duración de 55 minutos
+Costo de llamada dentro de la Franja_2: 68,75
+
+Llamada desde Lugarrrr hacia Allá con duración de 82 minutos
+Costo de la llamada: 3034
+
+Llamada desde Allá hacia Allá con duración de 31 minutos
+Costo de la llamada: 1643
+
+Llamada desde Origen1 hacia Allá con duración de 14 minutos
+Costo de llamada dentro de la Franja_1: 13,86
+
+Llamada desde Allá hacia Allá con duración de 51 minutos
+Costo de llamada dentro de la Franja_1: 50,49
+
+Llamada desde Allá hacia Acá con duración de 96 minutos
+Costo de llamada dentro de la Franja_1: 95,04
+
+Llamada desde Lugarrrr hacia Acá con duración de 44 minutos
+Costo de llamada dentro de la Franja_1: 43,56
+
+Llamada desde Allá hacia Origen1 con duración de 76 minutos
+Costo de llamada dentro de la Franja_1: 75,24
+
+Llamada desde Allá hacia Lugarrrr con duración de 92 minutos
+Costo de llamada dentro de la Franja_2: 115
+
+

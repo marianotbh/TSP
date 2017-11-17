@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1495154070 source:/home/alumno/odernararray/main.c
+	<stdio.h>
+	<stdlib.h>
+

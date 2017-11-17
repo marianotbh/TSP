@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1497651757 source:c:\facu\programacion i\tps\primer parcial\tp4\libs\arraylist\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1497651757 c:\facu\programacion i\tps\primer parcial\tp4\libs\arraylist\arraylist.h
+
+1497651757 source:c:\users\mariano\documents\github\cuatrimestre i\programacion i\tps\tp4\libs\arraylist\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1497651757 c:\users\mariano\documents\github\cuatrimestre i\programacion i\tps\tp4\libs\arraylist\arraylist.h
+

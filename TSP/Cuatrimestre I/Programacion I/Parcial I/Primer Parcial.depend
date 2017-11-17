@@ -1,0 +1,165 @@
+# depslib dependency file v1.0
+1495139654 source:c:\facu\proyectos\primer parcial\producto.c
+	"producto.h"
+
+1495138784 h"
+
+1495138677 source:c:\facu\proyectos\primer parcial\usuario.c
+	<string.h>
+	"usuario.h"
+
+1495138677 "
+
+1495139577 source:c:\facu\proyectos\primer parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	"controller.h"
+
+1495139577 r.h"
+
+1495138784 c:\facu\proyectos\primer parcial\controller.h
+	<stdio.h>
+	<stdlib.h>
+	"usuario.h"
+	"producto.h"
+
+1495138135 c:\facu\proyectos\primer parcial\usuario.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"libs_Validaciones.h"
+
+1495138348 daciones.h"
+
+1495139676 source:c:\facu\proyectos\primer parcial\controller.c
+	"controller.h"
+	"libs_Validaciones.h"
+
+1495138348 c:\facu\proyectos\primer parcial\producto.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"libs_Validaciones.h"
+
+1495053074 c:\facu\proyectos\primer parcial\libs_validaciones.h
+
+1494809032 source:c:\facu\proyectos\primer parcial\libs_ordenadores.c
+	<stdio.h>
+	<stdlib.h>
+
+1495053051 
+
+1495053051 source:c:\facu\proyectos\primer parcial\libs_validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1495146294 source:/home/alumno/facu/proyectos/Primer Parcial/controller.c
+	"controller.h"
+	"libs_Validaciones.h"
+
+1495146544 /home/alumno/facu/proyectos/Primer Parcial/controller.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"usuario.h"
+	"producto.h"
+
+1495146294 /home/alumno/facu/proyectos/Primer Parcial/usuario.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"libs_Validaciones.h"
+
+1495146294 /home/alumno/facu/proyectos/Primer Parcial/libs_Validaciones.h
+
+1495146294 /home/alumno/facu/proyectos/Primer Parcial/producto.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"libs_Validaciones.h"
+
+1495146294 source:/home/alumno/facu/proyectos/Primer Parcial/libs_Ordenadores.c
+	<stdio.h>
+	<stdlib.h>
+
+1495146294 source:/home/alumno/facu/proyectos/Primer Parcial/libs_Validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1495146294 source:/home/alumno/facu/proyectos/Primer Parcial/main.c
+	<stdio.h>
+	<stdlib.h>
+	"controller.h"
+
+1495146294 source:/home/alumno/facu/proyectos/Primer Parcial/producto.c
+	"producto.h"
+
+1495146634 source:/home/alumno/facu/proyectos/Primer Parcial/usuario.c
+	<string.h>
+	"usuario.h"
+
+1498083669 source:/home/alumno/facu-master/proyectos/Primer Parcial/Libs/ArrayList/ArrayList.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1497920333 /home/alumno/facu-master/proyectos/Primer Parcial/Libs/ArrayList/ArrayList.h
+
+1498086928 source:/home/alumno/facu-master/proyectos/Primer Parcial/Libs/Controller/controller.c
+	"controller.h"
+	"../ArrayList/ArrayList.h"
+	"../Validaciones/libs_Validaciones.h"
+
+1498087364 /home/alumno/facu-master/proyectos/Primer Parcial/Libs/Controller/controller.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../ArrayList/ArrayList.h"
+
+1498086530 /home/alumno/facu-master/proyectos/Primer Parcial/Libs/Entidades/usuario.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../Validaciones/libs_Validaciones.h"
+
+1497920333 /home/alumno/facu-master/proyectos/Primer Parcial/Libs/Validaciones/libs_Validaciones.h
+
+1498086530 /home/alumno/facu-master/proyectos/Primer Parcial/Libs/Entidades/producto.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../Validaciones/libs_Validaciones.h"
+
+1498086530 source:/home/alumno/facu-master/proyectos/Primer Parcial/Libs/Entidades/producto.c
+	"producto.h"
+
+1498086530 source:/home/alumno/facu-master/proyectos/Primer Parcial/Libs/Entidades/usuario.c
+	<string.h>
+	"usuario.h"
+
+1497920333 source:/home/alumno/facu-master/proyectos/Primer Parcial/Libs/Ordenadores/libs_Ordenadores.c
+	<stdio.h>
+	<stdlib.h>
+
+1497920333 source:/home/alumno/facu-master/proyectos/Primer Parcial/Libs/Validaciones/libs_Validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1498084928 source:/home/alumno/facu-master/proyectos/Primer Parcial/Libs/Menu/menu.c
+
+1498084909 source:/home/alumno/facu-master/proyectos/Primer Parcial/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Libs/Menu/menu.h"
+
+1498087058 /home/alumno/facu-master/proyectos/Primer Parcial/Libs/Menu/menu.h
+	"../Controller/controller.h"
+	"../ArrayList/ArrayList.h"
+
