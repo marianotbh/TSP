@@ -14,15 +14,25 @@ namespace Ejercicio_64
             // Mi central Centralita
             Centralita c = new Centralita("Fede Center");
             c.RutaDeArchivo = "../../../Log.txt";
+            c.LlamadaAgregada += c.OnLlamadaAgregada;
 
             Thread llamadas = new Thread(new ParameterizedThreadStart(Centralita.GenerarLlamada));
             Thread menu = new Thread(new ParameterizedThreadStart(Program.Menu));
-            
+
             menu.Start(c);
             llamadas.Start(c);
             menu.Join();
             llamadas.Abort();
             menu.Abort();
+
+            
+        }
+
+        public void OnLlamadaAgregada(object source, EventArgs args)
+        {
+            Console.WriteLine("Ganancias por llamadas locales: " + c.GananciasPorLocal);
+            Console.WriteLine("Ganancias por llamadas provinciales: " + c.GananciasPorProvincial);
+            Console.WriteLine("Ganancias por el total de las llamadas: " + c.GananciasPorTotal);
         }
 
         public static void Menu(object c)

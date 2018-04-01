@@ -8,11 +8,14 @@ using System.Threading;
 
 namespace Ejercicio_64
 {
+    public delegate void LlamadaAgregadaEventHandler(object source, EventArgs args);
+
     public class Centralita : IGuardar<string>
     {
         List<Llamada> listaDeLlamadas;
         string razonSocial;
         string path;
+        public event LlamadaAgregadaEventHandler LlamadaAgregada;
 
         public float GananciasPorLocal
         {
@@ -110,7 +113,19 @@ namespace Ejercicio_64
         void AgregarLlamada(Llamada ll)
         {
             this.Llamadas.Add(ll);
+            OnLlamadaAgregada(ll);
         }
+
+        protected virtual void OnLlamadaAgregada(Llamada ll)
+        {
+            LlamadaAgregada(this, null);
+        }
+
+
+
+
+
+
 
         public override string ToString()
         {
