@@ -1,3 +1,4 @@
+
 <body>
     <form action="Accion.php" method="post">
         <label>Nombre</label>
@@ -39,18 +40,18 @@
 
     echo "<br>";
     */
-    $ref = fopen("Lista.txt", "w");
+    // $ref = fopen("Lista.txt", "w");
 
-    include_once("../Entidades/Persona.php");
+    // include_once("../Entidades/Persona.php");
 
-    fwrite($ref, "Mariano-Burgos-22-2342123".PHP_EOL);
-    fwrite($ref, "Mauricio-Cerizza-15-1112321".PHP_EOL);
-    fwrite($ref, "Marina-Cardozo-20-5433111".PHP_EOL);
-    fwrite($ref, PHP_EOL);
-    fwrite($ref, "Demian-Demianez-30-1233412".PHP_EOL);
-    $p1 = new Persona("Pepo", "Jones", 34, 123456);
-    fwrite($ref, "$p1");
-    rewind($ref);  //vuelve al principio del archivo
+    // fwrite($ref, "Mariano-Burgos-22-2342123".PHP_EOL);
+    // fwrite($ref, "Mauricio-Cerizza-15-1112321".PHP_EOL);
+    // fwrite($ref, "Marina-Cardozo-20-5433111".PHP_EOL);
+    // fwrite($ref, PHP_EOL);
+    // fwrite($ref, "Demian-Demianez-30-1233412".PHP_EOL);
+    // $p1 = new Persona("Pepo", "Jones", 34, 123456);
+    // fwrite($ref, "$p1");
+    // rewind($ref);  //vuelve al principio del archivo
 
-    fclose($ref);
+    // fclose($ref);
 ?>

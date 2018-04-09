@@ -28,38 +28,70 @@
             return "$this->nombre-$this->apellido-$this->edad-$this->legajo".PHP_EOL;
         }
 
-        function CargarPersona($p)
+        static function CargarPersona($p)
         {
-            $ppl = LevantarPersonas("Lista.txt");
-            foreach($ppl as $peep)
+            $ret = false;
+            $ppl = self::LevantarPersonas("Lista.txt");
+            if(self::BuscarPorLegajo($ppl, $p->legajo))
+                echo "La persona ya se encuentra en la lista";
+            else
             {
-                if($peep == $p)
-                    return false;
-            }
-            $ppl[] = $p;
-            BajarPersonas($ppl, "Lista.txt");
-            return true;
+                $ppl[] = $p;
+                $ret = true;
+            }            
+            self::BajarPersonas($ppl, "Lista.txt");
+            return $ret;
         }
     
-        function ModificarPersona($p)
+        static function ModificarPersona($p)
         {
-            $ppl = LevantarPersonas("Lista.txt");
-            foreach($ppl as $peep)
+            $ret = false;
+            $ppl = self::LevantarPersonas("Lista.txt");
+            $persona = self::BuscarPorLegajo($ppl, $p->legajo);
+            echo "$persona";
+            if($persona == null)
+                echo "No se encuentra la persona que quiere modificar.";
+            else
             {
-                if($peep == $p)
-                {
+                $key = array_search($persona, $ppl);
+                $persona = $p;
+                $ret = true;
+                $ppl[$key] = $persona;
+            }
+            self::BajarPersonas($ppl, "Lista.txt");
+            return $ret;
+        }
     
+        static function BorrarPersona($p)
+        {
+            $ret = false;
+            $ppl = self::LevantarPersonas("Lista.txt");
+            if(self::BuscarPorLegajo($ppl, $p->legajo))
+            {
+                $key = array_search($p, $ppl);
+                echo $key;
+                unset($ppl[$key]);
+                $ret = true;
+            }
+            else
+                echo "La persona no se encuentra en la lista";
+            self::BajarPersonas($ppl, "Lista.txt");
+            return $ret;         
+        }
+
+        static function BuscarPorLegajo($ppl, $legajo)
+        {
+            foreach((array)$ppl as $p)
+            {
+                if((int)$p->legajo == (int)$legajo)
+                {
+                    return $p;
                 }
             }
-            return false;
+            return null;
         }
-    
-        function BorrarPersona($p)
-        {
-            
-        }
-    
-        function LevantarPersonas($file)
+
+        static function LevantarPersonas($file)
         {
             $ref = fopen($file, "r");
             while(!feof($ref))
@@ -74,7 +106,7 @@
             return $personas;
         }
 
-        function BajarPersonas($ppl, $file)
+        static function BajarPersonas($ppl, $file)
         {
             $ref = fopen($file, "w");
             foreach($ppl as $peep)

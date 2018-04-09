@@ -4,14 +4,16 @@
     switch($_POST["btn"])
     {
         case "Cargar":
-            CargarPersona(new Persona($_POST["nombre"], $_POST["apellido"], $_POST["dni"], $_POST["legajo"]));
-            echo "Cargado";
+            if(Persona::CargarPersona(new Persona($_POST["nombre"], $_POST["apellido"], $_POST["dni"], $_POST["legajo"])) == true)
+                echo "Cargado";
             break;
         case "Modificar":
-            echo "Modificado";
+            if(Persona::ModificarPersona(new Persona($_POST["nombre"], $_POST["apellido"], $_POST["dni"], $_POST["legajo"])) == true)
+                echo "Modificado";
             break;
         case "Borrar":
-            echo "Borrado";
+            if(Persona::BorrarPersona(new Persona($_POST["nombre"], $_POST["apellido"], $_POST["dni"], $_POST["legajo"])) == true)
+                echo "Borrado";
             break;
     }
 ?>
