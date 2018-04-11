@@ -1,13 +1,9 @@
 <?php
     include_once("../Entidades/Persona.php");
 
-    $ext = explode(".", $_FILES["foto"]["name"]);
-    $foto = "foto_".$_POST["legajo"].".".$ext[1];
-    if(move_uploaded_file($_FILES["foto"]["tmp_name"], "../img/$foto"))
-        echo "<p>archivo movido con exito</p>";
+    ValidarFoto($_FILES["foto"])
 
-    $p = new Persona($_POST["nombre"], $_POST["apellido"], $_POST["dni"], $_POST["legajo"], $foto);
-    
+    $p = new Persona($_POST["nombre"], $_POST["apellido"], $_POST["dni"], $_POST["legajo"], $_FILES["foto"]);
 
     switch($_POST["btn"])
     {
@@ -24,6 +20,18 @@
                 echo "Borrado";
             break;
     }
+
+    function ValidarFoto($file)
+    {
+        $imgTypes = array("jpg", "png", "bmp", "gif", "tif", "jpeg");
+        $ext = explode(".", $file["name"]);
+        if($file["size"] >= 10000000 && in_array($ext[1], $imgTypes))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
 ?>
 
-<br><br><a href="index.php">VOLVER</a>
+<br><br><a href="html.html">VOLVER</a>
