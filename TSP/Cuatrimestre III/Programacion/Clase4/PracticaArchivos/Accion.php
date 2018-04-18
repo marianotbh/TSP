@@ -31,12 +31,12 @@
     {
         $imgTypes = array("jpg", "png", "bmp", "gif", "tif", "jpeg");
         $ext = explode(".", $file["name"]);
-        echo $ext[1];
-        if($file["size"] <= 10000000 && in_array($ext[1], $imgTypes))
+        if($file["size"] >= 10000000 && in_array($ext[1], $imgTypes))
         {
             return true;
         }
-        return false;
+        else
+            return false;
     }
 ?>
 
