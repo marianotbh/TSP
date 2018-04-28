@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
 app.get("/login",function(req,res){
-    console.log("i'm in");
+    
     res.send("ok");
 });
 
@@ -37,7 +37,8 @@ app.post("/loginUsuario",function(req,res){
             return;
         }
         res.send("Debe ingresar Usuario y Contraseña");
-    },2000);
+    },5000);
+    
 });
 
 app.listen(3000,function(){
