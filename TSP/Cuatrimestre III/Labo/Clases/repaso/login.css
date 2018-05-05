@@ -1,0 +1,36 @@
+body {
+    background-color:royalblue;
+}
+
+input {
+    display:block;
+    width:200px;
+    padding:10px;
+    box-sizing:border-box;
+    
+}
+
+
+input:not([type=button]) {
+    border:none;
+    border-bottom:1px solid gray;
+}
+
+form#logIn {
+    background-color:white;
+    width:200px;
+    padding:20px;
+    border-radius:4px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+input + input {
+    margin-top:10px;
+}
+
+input#btnSignIn {
+
+}

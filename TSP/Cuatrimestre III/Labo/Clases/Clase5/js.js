@@ -15,7 +15,7 @@ function getPersonas() {
             }
         }
     };
-};
+}
 
 httpReq.open("GET", url, true);
 httpReq.send();
