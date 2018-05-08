@@ -2,54 +2,67 @@
     include("./Clases/Persona.php");
     class BD 
     {
-        private $con;
-        private $user;
-        private $clave;
-        private $pdo;
-        private $isinit = false;
+        static private $server;
+        static private $username;
+        static private $password;
+        static private $pdo;
+        static private $isinit = false;
 
-        private function __construct()
+        static function setup()
         {
-            if($isinit == false)
+            if(Self::$isinit == false)
             {
-                $con = "mysql:host=localhost;dbname=cdcol;charset=utf8";
-                $user = "root";
-                $clave = "";
-                $pdo = new PDO($con, $user, $clave);
-                $this->isinit = true;
+                Self::$server = "mysql:host=localhost;dbname=personas";
+                Self::$username = "root";
+                Self::$password = "";
+                try {
+                    Self::$pdo = new PDO(Self::$server, Self::$username, Self::$password);
+                    Self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    echo "Connected successfully";
+                }
+                catch(PDOException $e)
+                {
+                    echo "Connection failed: ".$e->getMessage();
+                }
+                Self::$isinit = true;
             }
         }
 
-        private function init()
+        static function init()
         {
-            self::__construct();
+            Self::setup();
         }
 
-        function Cargar($persona)
+        static function Cargar($persona)
         {
-            $this->init();
-            $qry = "INSERT INTO Personas(Nombre, Apellido, DNI, Legajo, Foto) VALUES('$persona->nombre', '$persona->apellido', '$persona->dni', '$persona->legajo', '$persona->foto')";
-            $this->EjecutarQuery($qry);
+            Self::init();
+            $qry = "INSERT INTO Personas(Nombre, Apellido, Edad, Legajo, Foto) VALUES('$persona->nombre', '$persona->apellido', '$persona->edad', '$persona->legajo', '$persona->foto')";
+            Self::EjecutarQuery($qry);
         }
 
-        function Modificar($persona)
+        static function Modificar($legajo, $nombre, $apellido, $edad, $foto)
         {
-            $this->init();
-            $qry = "UPDATE Personas SET Nombre='$persona->nombre', Apellido='$persona->apellido', DNI='$persona->dni', Foto='$persona->foto' WHERE Legajo='$persona->legajo'";
-            $this->EjecutarQuery($qry);
+            Self::init();
+            $qry = "UPDATE Personas SET Nombre='$nombre', Apellido='$apellido', Edad='$edad', Foto='$foto' WHERE Legajo='$legajo'";
+            Self::EjecutarQuery($qry);
         }
 
-        function Borrar($legajo)
+        static function Borrar($legajo)
         {
-            $this->init();
+            Self::init();
             $qry = "DELETE FROM Personas WHERE Legajo='$legajo'";
-            $this->EjecutarQuery($qry);
+            Self::EjecutarQuery($qry);
         }
 
-        private function EjecutarQuery($string)
+        static private function EjecutarQuery($string)
         {
-            $sql = $comm->query($string);
-            $res = $sql->execute();
+            try {
+                Self::$pdo->exec($string);
+                echo "Ejecutado con exito";
+            } catch(PDOException $e)
+            {
+                echo $sql."<br>".$e->getMessage();
+            }
         }
     }
 ?>

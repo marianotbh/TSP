@@ -17,7 +17,7 @@
 
         function Cargar($persona)
         {
-            $pdo
+            $pdo;
             $sql = "INSERT INTO Personas(Nombre, Apellido, DNI, Legajo, Foto) VALUES('$persona->nombre', '$persona->apellido', '$persona->dni', '$persona->legajo', '$persona->foto')";
         }
 

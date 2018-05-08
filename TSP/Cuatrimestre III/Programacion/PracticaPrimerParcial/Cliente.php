@@ -19,10 +19,19 @@
 
         static function cargarCliente($nombre, $correo, $clave)
         {
-            $c = new Cliente($nombre, $correo, $clave);
-            $ref = fopen("./clientes/clientesActuales.txt", "w");
-            fwrite($ref, $c->ToString());
-            fclose($ref);
+            if(self::validar($correo, $clave) == "Cliente inexistente")
+            {
+                $c = new Cliente($nombre, $correo, $clave);
+                $ref = fopen("./clientes/clientesActuales.txt", "a");
+                fwrite($ref, $c->ToString());
+                fclose($ref);
+                return "Cliente cargado,";
+            } else if(self::validar($correo, $clave) == "Cliente logueado")
+            {
+                return "El cliente ya se encuentra cargado en la base de datos.";
+            } else {
+                return "Error al validar";
+            }
         }
 
         static function validar($correo, $clave)
@@ -31,10 +40,10 @@
             $p;
             while(!feof($ref))
             {
-                $p = explode(fgets($ref));
+                $p = explode("-", fgets($ref));
                 if(count($p) == 3)
                 {
-                    if($p[1] == $correo && $p[2] == $clave)
+                    if((trim($p[1]) == trim($correo) && trim($p[2]) == trim($clave)))
                     {
                         return "Cliente logueado";
                     }

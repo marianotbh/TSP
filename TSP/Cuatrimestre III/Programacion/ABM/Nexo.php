@@ -1,21 +1,30 @@
 <?php
     include_once("./Clases/Archivos.php");
-    
-    if(ValidarFoto($_FILES["foto"]))
+    include_once("./Clases/Persona.php");
+
+    if(count($_POST) != 0)
     {
-        if(isset($_POST))
+        if(ValidarFoto($_FILES["foto"]))
         {
-            act($_POST["accion"]);
-        }
-        else if(isset($_GET))
-        {
-            act("Listar");
-        }
-        else
-            act();
-    }  
-    else
-        echo "Imagen invalida";
+            switch($_POST["accion"])
+            {
+                case "Cargar":
+                    echo Persona::Cargar(new Persona($_POST["nombre"], $_POST["apellido"], $_POST["edad"], $_POST["legajo"], CargarFoto($_FILES["foto"])));
+                    break;
+                case "Modificar":
+                    echo Persona::Modificar($_POST["legajo"], $_POST["nombre"], $_POST["apellido"], $_POST["edad"], CargarFoto($_FILES["foto"]));
+                    break;
+                case "Borrar":
+                    echo Persona::Borrar($_POST["legajo"]);
+                    break;
+            }
+        } else
+        echo "Imagen invalida";   
+    }
+    else if(isset($_GET))
+    {
+        echo Persona::Listar();
+    }    
 ?>
 
 <br><br><a href="html.html">VOLVER</a>

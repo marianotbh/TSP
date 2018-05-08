@@ -1,5 +1,6 @@
 <?php
     include_once("./IVendible.php");
+    include_once("./Files.php");
     class Helado implements IVendible
     {
         private $sabor;
@@ -13,21 +14,29 @@
             $this->foto = $f;
         }
 
-        function cargarHelado($helado)
+        static function cargarHelado($helado)
         {
-            $ref = fopen("helados/sabores.txt","w");
-            fwrite($ref, $helado->ToString());
-            $this->cargarFoto($this->foto);
-            fclose($ref);
+            if($helado->buscarPorSabor() != null)
+            {
+                $ref = fopen("helados/sabores.txt","a");
+                $helado->foto = self::cargarFoto($helado->sabor, $helado->foto);
+                fwrite($ref, $helado->ToString());            
+                fclose($ref);
+                return "Helado cargado con éxito";
+            } else {
+                return "El sabor ya se encontraba cargado";
+            }
+           
         }
 
-        function cargarFoto($file)
+        static function cargarFoto($sabor, $file)
         {
             $ext = explode(".", $file["name"]);
             $hora = date("His");
-            $foto = $this->sabor.".".$date.".".$ext[1];
+            $foto = $sabor.".".$hora.".".$ext[1];
             if(move_uploaded_file($file["tmp_name"], "./heladosImagen/$foto"))
                 echo "<p>Archivo movido con exito</p>";
+            return $foto;
         }
 
         function ToString()
@@ -60,7 +69,7 @@
             return $total;
         }
 
-        function ListadoHelados()
+        static function ListadoHelados()
         {
             $ref = fopen("./helados/heladosSabores.txt", "r");
             $h;
@@ -81,8 +90,7 @@
         function borrarHeladoPOST()
         {
             $ret = $this->borrarHeladoGET();
-            if($ret == "El sabor se encuentra en la lista")
-            {
+            if($ret == "El sabor se encuentra en la lista") {
                 $origen = "./heladosImagen/$this->foto";
                 $newname = implode(".", array_splice(explode(".", $this->foto), 1, 0, "borrado"));
                 $destino = "./heladosBorrados/$newname";
@@ -90,7 +98,11 @@
                     echo "<p>Foto movida a heladosBorrados</p>";
                 else 
                     echo "err";
-                $this->buscarYborrar();
+                if($this->buscarYborrar() == true) {
+                    $ret = "Helado borrado con éxito";
+                } else {
+                    $ret = "No se pudo borrar el helado";
+                }
             }
             return $ret;
             
@@ -129,7 +141,7 @@
         function buscarPorSabor()
         {
             $ret = null;
-            if(($helados = $this->levantarArrayDeArchivo("./helados/heladosSabores.txt",3,"-")) != null)
+            if(($helados = levantarArrayDeArchivo("./helados/heladosSabores.txt",3,"-")) != null)
             {
                 foreach($helado as $h)
                 {
@@ -150,37 +162,10 @@
                 foreach($helados as $h)
                 {
                     unset($helados[array_search($h,$helados)]);
-                    $this->bajarArrayAArchivo($helados,"./helados/heladosSabores.txt",$ToString);
+                    $this->bajarArrayAArchivo($helados,"./helados/heladosSabores.txt");
                     $ret = true;
                 }
             }
             return $ret;
-        }
-
-
-        function levantarArrayDeArchivo($file, $objProperties, $delimiter)
-        {
-            $obj;
-            $arr = null;
-            $ref = fopen($file, "r");
-            while(!feof($ref))
-            {
-                if(count($obj = explode($delimiter, fgets($ref))) == $objProperties)
-                {
-                    $arr[] = $obj;
-                }
-            }
-            fclose($ref);
-            return $arr;
-        }
-
-        function bajarArrayAArchivo($arr,$file)
-        {
-            $ref = fopen($file, "w");
-            foreach($arr as $obj)
-            {
-                fwrite($ref,$obj->toString());
-            }
-            fclose($ref);
         }
     }

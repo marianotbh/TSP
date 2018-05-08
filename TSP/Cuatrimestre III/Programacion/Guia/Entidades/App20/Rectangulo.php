@@ -6,25 +6,29 @@
 
     include_once("./Entidades/App20/Punto.php");
 
-    private $_vertice1;
-    private $_vertice2;
-    private $_vertice3;
-    private $_vertice4;
-    $area;
-    $ladoDos;
-    $ladoUno;
-    $perimetro;
-
-    function __construct($v1, $v3)
+    class Rectangulo
     {
-        $this->_vertice1 = $v1;
-        $this->_vertice3 = $v3;
-    }
+        private $_vertice1;
+        private $_vertice2;
+        private $_vertice3;
+        private $_vertice4;
+        private $area;
+        private $ladoDos;
+        private $ladoUno;
+        private $perimetro;
 
-    function Dibujar()
-    {
-        $s;
+        function __construct($v1, $v3)
+        {
+            $this->_vertice1 = $v1;
+            $this->_vertice3 = $v3;
+        }
 
-        return $s;
+        function Dibujar()
+        {
+            $s;
+            echo "$s";
+            return $s;
+        }
     }
+    
 ?>

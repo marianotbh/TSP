@@ -1,8 +1,9 @@
 <?php
     include_once("./Clases/Archivos.php");
+    include_once("./Clases/BD.php");
     class Persona
     {
-        private $archivo = "./Lista.txt";
+        static private $archivo = "./Lista.txt";
         private $nombre;
         private $apellido;
         private $edad;
@@ -32,75 +33,82 @@
             return "$this->nombre-$this->apellido-$this->edad-$this->legajo-$this->foto".PHP_EOL;
         }
 
-        function Cargar()
+        static function Cargar($p)
         {
-            echo "cargando";
-            $ret = false;
-            echo "arcvhio en cargar: ".$this->archivo;
-            $ppl = $this->LevantarPersonas($this->archivo);
-            if($this->BuscarPorLegajo($ppl, $this->legajo))
-                echo "La persona ya se encuentra en la lista";
+            $ret = "No se pudo cargar a $p->nombre $p->apellido ";
+            echo "Archivo: ".Self::$archivo;
+            $ppl = Self::PickUpPersonasFromFile(Self::$archivo, 5, "-");
+            if(Self::BuscarPorLegajo($ppl, $p->legajo))
+                $ret = "La persona ya se encuentra en la lista";
             else
             {
-                $this->foto = $this->CargarFoto($this->foto);
-                $ppl[] = $this;
-                $ret = true;
+                $ppl[] = $p;
+                DropToFile($ppl, Self::$archivo);
+                BD::Cargar($p);
+                $ret = "Cargado con éxito";
             }            
-            $this->BajarPersonas($ppl, $this->archivo);
             return $ret;
         }
     
-        function Modificar()
+        static function Modificar($legajo, $nombre, $apellido, $edad, $foto)
         {
-            $ret = false;
-            $ppl = $this->LevantarPersonas($this->archivo);
-            $persona = $this->BuscarPorLegajo($ppl, $this->legajo);
+            $ret = "No se pudo modificar a $nombre $apellido";
+            $ppl = Self::PickUpPersonasFromFile(Self::$archivo, 5, "-");
+            $persona = Self::BuscarPorLegajo($ppl, $legajo);
             if($persona == null)
-                echo "No se encuentra la persona que quiere modificar.";
+                $ret = "No se encuentra la persona que quiere modificar.";
             else
             {
-                $this->BackUp($persona->foto);
+                BackUp($persona->foto);
                 $key = array_search($persona, $ppl);
-                $persona = $this;
-                $persona->foto = $this->CargarFoto($persona->foto);
+                $persona->nombre = $nombre;
+                $persona->apellido = $apellido;
+                $persona->edad = $edad;
+                $persona->foto = $foto;
                 $ppl[$key] = $persona;
-                $ret = true;
-            }
-            $this->BajarPersonas($ppl, $this->archivo);
+                DropToFile($ppl, Self::$archivo);
+                BD::Modificar($legajo, $nombre, $apellido, $edad, $foto);
+                $ret = "Modificado con éxito";
+            }            
             return $ret;
         }
     
-        function Borrar()
+        static function Borrar($legajo)
         {
             $ret = false;
-            $ppl = $this->LevantarPersonas($this->archivo);
-            $paBorrar = $this->BuscarPorLegajo($ppl, $this->legajo);
+            $ppl = Self::PickUpPersonasFromFile(Self::$archivo, 5, "-");
+            $paBorrar = Self::BuscarPorLegajo($ppl, $legajo);
             if($paBorrar != null)
             {
                 $key = array_search($paBorrar, $ppl);
-                echo "key: $key -- ";
-                echo "foto dir: ".$ppl[$key]->foto." -- ";
-                echo $ppl[$key];
+                unlink($ppl[$key]->foto);
                 unset($ppl[$key]);
-                $ret = true;
+                DropToFile($ppl, Self::$archivo);
+                BD::Borrar($legajo);                
+                $ret = "Borrado con éxito";
             }
             else
-                echo "La persona no se encuentra en la lista";
-            $this->BajarPersonas($ppl, $this->archivo);
-            return $ret;         
+                $ret = "La persona no se encuentra cargada";
+            return $ret;      
         }
 
-        function Listar()
+        static function Listar()
         {
-            $personas = $this->LevantarPersonas($this->archivo);
-            foreach($personas as $p)
+            $ret = "";
+            $personas = Self::PickUpPersonasFromFile(Self::$archivo, 5, "-");
+            if(count($personas) > 0)
             {
-                echo "$p";
+                foreach($personas as $p)
+                {
+                    $ret .= "$p";
+                }
             }
-            $this->BajarPersonas($ppl, $this->archivo);
+            else
+                $ret = "No hay personas para listar";
+            return $ret;
         }
 
-        function BuscarPorLegajo($ppl, $legajo)
+        static function BuscarPorLegajo($ppl, $legajo)
         {
             foreach((array)$ppl as $p)
             {
@@ -112,47 +120,22 @@
             return null;
         }
 
-        function LevantarPersonas($file)
+        
+        static function PickUpPersonasFromFile($file, $objProperties, $delimiter)
         {
-            $personas = array();
+            $obj;
+            $arr = null;
             $ref = fopen($file, "r");
+            rewind($ref);
             while(!feof($ref))
             {
-                $persona = explode("-", fgets($ref));
-                if(count($persona) == 5)
+                if(count($obj = explode($delimiter, fgets($ref))) == $objProperties)
                 {
-                    $personas[] = new Persona($persona[0], $persona[1], $persona[2], $persona[3], $persona[4]);
+                    $arr[] = new Persona($obj[0], $obj[1], $obj[2], $obj[3], $obj[4]);
                 }
             }
             fclose($ref);
-            return $personas;
-        }
-
-        function BajarPersonas($ppl, $file)
-        {
-            $ref = fopen($file, "w");
-            foreach($ppl as $peep)
-            {
-                fwrite($ref, "$peep");
-            }
-            fclose($ref);
-        }
-
-        function CargarFoto($file)
-        {
-            $ext = explode(".", $file["name"]);
-            $foto = "foto_".$_POST["legajo"].".".$ext[1];
-            if(move_uploaded_file($file["tmp_name"], "./img/$foto"))
-                echo "<p>Archivo movido con exito</p>";
-            return $foto;
-        }
-
-        function BackUp($file)
-        {
-            $origen = "./img/$file";
-            $destino = "./img_backup/backup_$file";
-            if(copy(trim($origen), trim($destino)))
-                echo "<p>Guardada copia de respaldo</p>";
+            return $arr;
         }
     }
 ?>
