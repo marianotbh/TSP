@@ -16,8 +16,7 @@
                 echo Alumno::ModificarAlumno($_POST["mail"], $_POST["nombre"], $_POST["apellido"], CargarFoto($_POST["nombre"], $_FILES["foto"], "./Fotos/"));
                 break;
         }  
-    }
-    else if(isset($_GET))
+    } else if(isset($_GET))
     {
         switch($_GET["accion"])
         {
