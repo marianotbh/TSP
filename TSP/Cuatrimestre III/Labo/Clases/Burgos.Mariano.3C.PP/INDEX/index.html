@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index</title>
+    <title>Inicio</title>
     <script src="../script.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../general.css" type="text/css"> 
     <link rel="stylesheet" href="index.css" type="text/css"> 
@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="../img/logo.png"/>
 </head>
 <body>
+    <img id="loadingGif" src="https://www.wallies.com/filebin/images/loading_apple.gif" class="hidden">
     <header>
         <nav id="icon" class="floating">
             <img src="../img/logo.png"/>
@@ -27,18 +28,25 @@
     
     
     <div id="container">
-        <img id="loadingGif" src="https://www.wallies.com/filebin/images/loading_apple.gif" class="hidden">
         <form id="editNota" class="hidden">
+            <input type="text" id="id" style="display:none">
+            <label>Legajo:</label>
             <input type="text" id="legajo">
+            <hr>
+            <label>Nombre:</label>
             <input type="text" id="nombre">
+            <hr>
+            <label>Materia:</label>
             <input type="text" id="materia">
+            <hr>
+            <label>Nota:</label>
             <input type="text" id="nota">
+            <hr>
             <input type="button" id="confirmBtn" value="Guardar" onclick="edit()">
-            <input type="button" id="cancelBtn" value="Cancelar" onclick="toggleHide('editNota')">
+            <input type="button" id="cancelBtn" value="Cancelar" onclick="hide()">
         </form>
         <table>
             <thead>
-                <th>ID</th>
                 <th>Legajo</th>
                 <th>Nombre</th>
                 <th>Materia</th>

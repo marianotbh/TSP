@@ -72,13 +72,23 @@ nav#controls div{
 }
 
 table {
+    border-collapse: collapse;
     margin:auto;
+    margin-bottom:20px;
 }
-
-
-
-
-
+table tr:nth-child(even) {
+    background-color:#eee;
+}
+table tr:nth-child(odd) {
+    background-color:white;
+}
+table thead tr {
+    background-color:black !important;
+    color:white !important;
+}
+table thead th {
+    padding:5px 10px;
+}
 
 #container {
     margin-top:20px;
@@ -96,11 +106,16 @@ table {
     z-index:99;
 }
 #editNota > * {
-    width:100%;
-    box-sizing: border-box;
 }
-#editNota > * + * {
-    margin-top:5px;
+#editnota input {
+    width:300px;
+    display:inline-block !important;
+}
+#editNota label {
+    width:75px;
+    font-weight:bold !important;
+    text-align:right;
+    display:inline-block
 }
 #confirmBtn,
 #cancelBtn {

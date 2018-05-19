@@ -10,6 +10,7 @@ var callback = function () {
                 window.location.href = "../INDEX/index.html";
             } else if (json != null && json.type == "error") {
                 err();
+                document.getElementById("loadingGif").className = "hidden";
             }
         }
     }
@@ -33,13 +34,32 @@ function login() {
     localStorage.setItem("email", correo);
     var datosLogin = { email: correo, password: pw };
     ajax("POST", JSON.stringify(datosLogin), "http://localhost:3000/login", callback);
+    document.getElementById("loadingGif").className = "shown";
 }
 
 function getNotas() {
     if (httpReq.readyState == 4) {
         if (httpReq.status == 200) {
+            
             json = JSON.parse(httpReq.responseText);
             tablify(json);
+        }
+    }
+}
+
+function callbackEdit() {
+    if (httpReq.readyState == 4) {
+        if (httpReq.status == 200) {
+            json = JSON.parse(httpReq.responseText);
+            console.log(json);
+            if (json.type == "ok") {
+                ajax("GET", "", "http://localhost:3000/notas", getNotas);
+                document.getElementById("loadingGif").className = "shown";
+                hide();
+            } else if (json.type == "error") {
+                alert("error");
+                
+            }
         }
     }
 }
@@ -47,6 +67,7 @@ function getNotas() {
 function tablify(arr) {
     var i;
     html = '';
+    localStorage.setItem("items", JSON.stringify(arr));
     type = localStorage.getItem("type");
     for (i = 0; i < arr.length; i++) {
         obj = arr[i];
@@ -55,28 +76,33 @@ function tablify(arr) {
         } else if (obj.nota >= 4) {
             html += "<tr align='center'>";
         }
-        html += '<td>' + obj.id + '</td><td>' + obj.legajo + '</td><td>' + obj.nombre + '</td><td>' + obj.materia + '</td><td>' + obj.nota + '</td>';
+        html += '<td>' + obj.legajo + '</td><td>' + obj.nombre + '</td><td>' + obj.materia + '</td><td>' + obj.nota + '</td>';
         if (type == "Admin") {
-            html += "<td><input type='button' value='Editar' onClick=hide()/></td></tr>";
+            html += "<td><input type='button' value='Editar' onclick='hide(" + obj.id + ")'/></td></tr>";
         } else if (type == "User") {
             html += "</tr>";
         }
     }
+    document.getElementById("loadingGif").className = "hidden";
     document.getElementById('tbody').innerHTML = html;
+    
 }
 
 function edit() {
+    var id = document.getElementById("id").value;
     var leg = document.getElementById("legajo").value;
     var nom = document.getElementById("nombre").value;
     var mat = document.getElementById("materia").value;
     var not = document.getElementById("nota").value;
     var datosPost = {
+        id: id,
         legajo: leg,
         nombre: nom,
         materia: mat,
         nota: not
     }
-    ajax("POST", JSON.stringify(datosPost), "http://localhost:3000/editarNota", getNotas);
+    ajax("POST", JSON.stringify(datosPost), "http://localhost:3000/editarNota", callbackEdit);
+    document.getElementById("loadingGif").className = "shown";
 }
 
 function err() {
@@ -85,20 +111,26 @@ function err() {
     document.getElementById("errMsg").innerHTML = "Correo o contraseña incorrectos";
 }
 
-function hide(legajo, nombre, materia, nota) {
+function hide(id = null) {
     if (document.getElementById("editNota").className == "hidden") {
         document.getElementById("editNota").className = "shown";
     }
     else if (document.getElementById("editNota").className == "shown") {
         document.getElementById("editNota").className = "hidden";
     }
-    document.getElementById("legajo").value = legajo;
-    document.getElementById("nombre").value = nombre;
-    document.getElementById("materia").value = materia;
-    document.getElementById("nota").value = nota;
-
+    if (id != null) {
+        items = JSON.parse(localStorage.getItem("items"));
+        for (i = 0; i < items.length; i++) {
+            if (items[i].id == id) {
+                document.getElementById("id").value = items[i].id;
+                document.getElementById("legajo").value = items[i].legajo;
+                document.getElementById("nombre").value = items[i].nombre;
+                document.getElementById("materia").value = items[i].materia;
+                document.getElementById("nota").value = items[i].nota;
+            }
+        }
+    }
 }
-
 window.onload = ajax("GET", "", "http://localhost:3000/notas", getNotas);
 
 
