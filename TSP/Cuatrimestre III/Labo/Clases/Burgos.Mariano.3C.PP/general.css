@@ -44,9 +44,6 @@ p + p {
 .hidden {
     display:none;
 }
-.shown {
-    display:block;
-}
 input[type=button] {
     border:none;
     background-color:#ef7f1a;
@@ -57,8 +54,6 @@ input[type=button] {
 input[type=text] {
     border:none;
 }
-
-
 .err {
     background-color:rgba(255,0,0,0.2);
     color:red;

@@ -1,67 +1,48 @@
-var httpReq = new XMLHttpRequest();
-
-var callback = function () {
-    if (httpReq.readyState == 4) {
-        if (httpReq.status == 200) {
-            var json = JSON.parse(httpReq.responseText);
-            console.log(json);
-            if (json != null && (json.type == "Admin" || json.type == "User")) {
-                localStorage.setItem("type", json.type);
-                window.location.href = "../INDEX/index.html";
-            } else if (json != null && json.type == "error") {
-                err();
-                document.getElementById("loadingGif").className = "hidden";
-            }
-        }
+var callbackLogin = function (json) {
+    if (json != null && (json.type == "Admin" || json.type == "User")) {
+        localStorage.setItem("type", json.type);
+        window.location.href = "../INDEX/index.html";
+    } else if (json != null && json.type == "error") {
+        err();
+        $("#loadingGif").hide();
     }
 }
 
-function ajax(metodo, parametros, url, callback) {
-    httpReq.onreadystatechange = callback;
-    if (metodo == "GET") {
-        httpReq.open("GET", url, true);
-        httpReq.send();
-    } else if (metodo == "POST") {
-        httpReq.open("POST", url, true);
-        httpReq.setRequestHeader("Content-type", "application/json");
-        httpReq.send(parametros);
+var callbackGetNotas = function (json) {
+    tablify(json);
+}
+
+var callbackEdit = function (json) {
+    console.log(json);
+    if (json.type == "ok") {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/notas",
+            success: function (response) {
+                callbackGetNotas(response)
+            }
+        });
+        $("#loadingGif").show();
+        showEdit();
+    } else if (json.type == "error") {
+        alert("error");
     }
 }
 
 function login() {
-    var correo = document.getElementById("correo").value;
-    var pw = document.getElementById("pw").value;
+    var correo = $("#correo").val();
+    var pw = $("#pw").val();
     localStorage.setItem("email", correo);
     var datosLogin = { email: correo, password: pw };
-    ajax("POST", JSON.stringify(datosLogin), "http://localhost:3000/login", callback);
-    document.getElementById("loadingGif").className = "shown";
-}
-
-function getNotas() {
-    if (httpReq.readyState == 4) {
-        if (httpReq.status == 200) {
-            
-            json = JSON.parse(httpReq.responseText);
-            tablify(json);
+    $.ajax({
+        type: "POST",
+        data: JSON.stringify(datosLogin),
+        url: "http://localhost:3000/login",
+        success: function (response) {
+            callbackLogin(response)
         }
-    }
-}
-
-function callbackEdit() {
-    if (httpReq.readyState == 4) {
-        if (httpReq.status == 200) {
-            json = JSON.parse(httpReq.responseText);
-            console.log(json);
-            if (json.type == "ok") {
-                ajax("GET", "", "http://localhost:3000/notas", getNotas);
-                document.getElementById("loadingGif").className = "shown";
-                hide();
-            } else if (json.type == "error") {
-                alert("error");
-                
-            }
-        }
-    }
+    });
+    $("#loadingGif").show();
 }
 
 function tablify(arr) {
@@ -78,22 +59,43 @@ function tablify(arr) {
         }
         html += '<td>' + obj.legajo + '</td><td>' + obj.nombre + '</td><td>' + obj.materia + '</td><td>' + obj.nota + '</td>';
         if (type == "Admin") {
-            html += "<td><input type='button' value='Editar' onclick='hide(" + obj.id + ")'/></td></tr>";
+            html += "<td><input type='button' value='Editar' onclick='showEdit(" + obj.id + ")'/></td></tr>";
         } else if (type == "User") {
             html += "</tr>";
         }
     }
-    document.getElementById("loadingGif").className = "hidden";
-    document.getElementById('tbody').innerHTML = html;
-    
+    $('#loadingGif').hide();
+    $('#tbody').html(html);
+
+}
+
+function showEdit(id = null) {
+    if ($("#editNota").css('display') == 'none') {
+        $("#editNota").show();
+        if (id != null) {
+            items = JSON.parse(localStorage.getItem("items"));
+            for (i = 0; i < items.length; i++) {
+                if (items[i].id == id) {
+                    $("#id").val(items[i].id);
+                    $("#legajo").val(items[i].legajo);
+                    $("#nombre").val(items[i].nombre);
+                    $("#materia").val(items[i].materia);
+                    $("#nota").val(items[i].nota);
+                }
+            }
+        }
+    }
+    else if ($("#editNota").css('display') != 'none') {
+        $("#editNota").hide();
+    }
 }
 
 function edit() {
-    var id = document.getElementById("id").value;
-    var leg = document.getElementById("legajo").value;
-    var nom = document.getElementById("nombre").value;
-    var mat = document.getElementById("materia").value;
-    var not = document.getElementById("nota").value;
+    var id = $("#id").val();
+    var leg = $("#legajo").val();
+    var nom = $("#nombre").val();
+    var mat = $("#materia").val();
+    var not = $("#nota").val();
     var datosPost = {
         id: id,
         legajo: leg,
@@ -101,37 +103,30 @@ function edit() {
         materia: mat,
         nota: not
     }
-    ajax("POST", JSON.stringify(datosPost), "http://localhost:3000/editarNota", callbackEdit);
-    document.getElementById("loadingGif").className = "shown";
+    $.ajax({
+        type: "POST",
+        data: datosPost,
+        url: "http://localhost:3000/editarNota",
+        success: function (response) {
+            callbackEdit(response);
+        }
+    })
+    $("#loadingGif").show();
 }
 
 function err() {
-    document.getElementById("correo").className = " err";
-    document.getElementById("pw").className = " err";
-    document.getElementById("errMsg").innerHTML = "Correo o contraseña incorrectos";
+    $("#correo").addClass("err");
+    $("#pw").addClass("err");
+    $("#errMsg").html("Correo o contraseña incorrectos");
 }
 
-function hide(id = null) {
-    if (document.getElementById("editNota").className == "hidden") {
-        document.getElementById("editNota").className = "shown";
+window.onload = $.ajax({
+    type: "GET",
+    url: "http://localhost:3000/notas",
+    success: function (response) {
+        callbackGetNotas(response);
     }
-    else if (document.getElementById("editNota").className == "shown") {
-        document.getElementById("editNota").className = "hidden";
-    }
-    if (id != null) {
-        items = JSON.parse(localStorage.getItem("items"));
-        for (i = 0; i < items.length; i++) {
-            if (items[i].id == id) {
-                document.getElementById("id").value = items[i].id;
-                document.getElementById("legajo").value = items[i].legajo;
-                document.getElementById("nombre").value = items[i].nombre;
-                document.getElementById("materia").value = items[i].materia;
-                document.getElementById("nota").value = items[i].nota;
-            }
-        }
-    }
-}
-window.onload = ajax("GET", "", "http://localhost:3000/notas", getNotas);
+});
 
 
 
