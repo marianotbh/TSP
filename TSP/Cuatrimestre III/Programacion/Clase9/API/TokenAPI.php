@@ -10,7 +10,6 @@ class TokenApi extends Token{
         if($login[0] > 0){
             $token = Token::CodificarToken($user);
             $respuesta = array("Estado" => "OK", "Mensaje" => "OK", "Token" => $token);
-            
         }
         else{
             $respuesta = array("Estado" => "ERROR", "Mensaje" => "Usuario o clave invalidos.");
@@ -21,9 +20,7 @@ class TokenApi extends Token{
 
     public function ValidarToken($request, $response, $args){
         $token = $request->getHeader("token");
-        $parametros = $request->getParsedBody();
-        $user = $parametros["user"];
-        $respuesta = Token::DecodificarToken($user,$token[0]);
+        $respuesta = Token::DecodificarToken($token[0]);
         $newResponse = $response->withJson($respuesta,200);
         return $newResponse;
     }
