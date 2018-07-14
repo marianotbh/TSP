@@ -1,21 +1,21 @@
-namespace Facultad {
+namespace SP {
     export class Persona {
-        private id: number;
         private nombre: string;
         private apellido: string;
+        private edad: number;
 
-        constructor(id: number, nombre: string, apellido: string) {
-            this.id = id;
+        constructor(edad: number, nombre: string, apellido: string) {
+            this.edad = edad;
             this.nombre = nombre;
             this.apellido = apellido;
         }
 
-        public getID(): number {
-            return this.id;
+        public getEdad(): number {
+            return this.edad;
         }
 
-        public setID(id: number): void {
-            this.id = id;
+        public setEdad(edad: number): void {
+            this.edad = edad;
         }
 
         public getNombre(): string {
@@ -33,5 +33,11 @@ namespace Facultad {
         public setApellido(apellido: string): void {
             this.apellido = apellido;
         }
+
+        public personaToJSON(): string {
+            return '"nombre":"' + this.getNombre() + '","apellido":"' + this.getApellido() + '","edad":' + this.getEdad() + '"';
+        }
+
+        
     }
 }
