@@ -14,13 +14,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./CSS/stylesheet.css">
-    <script src="js/Entidades/Persona.js"></script>
-    <script src="js/Entidades/Cliente.js"></script>
-    <script src="js/Funciones.js"></script>
+    <script src="js/Persona.js"></script>
+    <script src="js/Empleado.js"></script>
+    <script src="js/Manejadora.js"></script>
     <title>Modelo Segundo Parcial</title>
 </head>
 
-<body onload="Facultad.Funciones.OnLoad()">
+<body onload="SP.Manejadora.OnLoad()">
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
@@ -51,56 +51,41 @@
     </header>
 
     <div class="container">
-        <h1>Lista de Personas</h1>
+        <h1>Lista de empleados</h1>
 
         <hr>
 
         <div id="listMenu" class="row">
 
-            <div class="form-group col-sm-12  col-md-4">
-                <input type="text" placeholder="Filtrar por nombre (case sensitive)" id="txtFiltroNombre" class="form-control" name="txtFiltro"
-                    onkeyup="Facultad.Funciones.FilterByName()">
-            </div>
-
             <div class="input-group col-md-4">
-                <input type="text" id="txtPromedio" class="form-control" name="Promedio" onkeyup="Facultad.Funciones.FilterByName()" readonly>
+                <input type="text" id="txtPromedio" class="form-control" name="Promedio" onkeyup="SP.Manejadora.filtrarPorHorario()" readonly>
                 <div class="input-group-append">
-                    <button name="btnEstadisticas" id="btnEstadisticas" class="btn btn-info" onclick="Facultad.Funciones.Stats()">Calcular Promedio</button>
+                    <button name="btnEstadisticas" id="btnEstadisticas" class="btn btn-info" onclick="SP.Manejadora.Stats()">Calcular Promedio</button>
                 </div>
             </div>
-
 
             <button id="btnNuevoRegistro" class="btn col-sm-12 col-md-2" onclick="$('form#cargar').show()">+ Nuevo registro</button>
 
             <div id="filters" class="btn-group col-sm-12 col-md-2">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    Columnas
+                    Filtro por horario
                 </button>
                 <div class="dropdown-menu">
-                    <div class="dropdown-item checkbox">
-                        <label>
-                            <input type="checkbox" name="mostrarID" id="mostrarID" value="" checked onchange="Facultad.Funciones.Checkbox_OnChange()">ID</label>
+                    <div class="radio dropdown-item">
+                        <label><input type="radio" name="filtro" id="filtroTodos" checked onchange="SP.Manejadora.Checkbox_OnChange()">Todos</label>
                     </div>
-                    <div class="dropdown-item checkbox">
-                        <label>
-                            <input type="checkbox" name="mostrarNombre" id="mostrarNombre" value="" checked onchange="Facultad.Funciones.Checkbox_OnChange()">Nombre</label>
+                    <div class="radio dropdown-item">
+                        <label><input type="radio" name="filtro" id="filtroManana" onchange="SP.Manejadora.Checkbox_OnChange()">Mañana</label>
                     </div>
-                    <div class="dropdown-item checkbox">
-                        <label>
-                            <input type="checkbox" name="mostrarEdad" id="mostrarEdad" value="" checked onchange="Facultad.Funciones.Checkbox_OnChange()">Edad</label>
+                    <div class="radio dropdown-item">
+                        <label><input type="radio" name="filtro" id="filtroTarde" onchange="SP.Manejadora.Checkbox_OnChange()">Tarde</label>
                     </div>
-                    <div class="dropdown-item checkbox">
-                        <label>
-                            <input type="checkbox" name="mostrarApellido" id="mostrarApellido" value="" checked onchange="Facultad.Funciones.Checkbox_OnChange()">Apellido</label>
-                    </div>
-                    <div class="dropdown-item checkbox">
-                        <label>
-                            <input type="checkbox" name="mostrarSexo" id="mostrarSexo" value="" checked onchange="Facultad.Funciones.Checkbox_OnChange()">Sexo</label>
+                    <div class="radio dropdown-item">
+                        <label><input type="radio" name="filtro" id="filtroNoche" onchange="SP.Manejadora.Checkbox_OnChange()">Noche</label>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <table class="table table-striped" id="tabla">
 
@@ -108,39 +93,38 @@
     </div>
 
     <form id="cargar" class="row shadow" style="display:none">
-        <div style="display:none" class="form-group col-md-12" id="idGroup">
-            <label for="id" class="control-label">ID: </label>
-            <input type="text" class="form-control" name="id" id="id" disabled>
+        <div class="form-group col-md-12" id="idGroup">
+            <label for="legajo" class="control-label">Legajo: </label>
+            <input type="number" class="form-control" name="legajo" id="legajo">
         </div>
         <div class="form-group col-md-12" id="nombreGroup">
             <label for="nombre" class="control-label">Nombre: </label>
             <input type="text" class="form-control" name="nombre" id="nombre" onfocus="$('#nombreGroup').removeClass('has-danger')"
-                onblur="Facultad.Funciones.CheckName()">
+                onblur="SP.Manejadora.CheckName()">
             <div id="nmfb" class="invalid-feedback">Nombre contiene caracteres inválidos.</div>
         </div>
         <div class="form-group col-md-12" id="apellidoGroup">
             <label for="apellido" class="control-label">Apellido: </label>
             <input type="text" class="form-control" name="apellido" id="apellido" onfocus="$('#apellidoGroup').removeClass('has-danger')"
-                onblur="Facultad.Funciones.CheckLastName()">
+                onblur="SP.Manejadora.CheckLastName()">
             <div id="lnfb" class="invalid-feedback">Apellido contiene caracteres inválidos.</div>
         </div>
         <div class="form-group col-md-12" id="edadGroup">
             <label for="edad" class="control-label">Edad: </label>
-            <input type="number" class="form-control" name="edad" id="edad" onfocus="$('#edadGroup').removeClass('has-danger')" onblur="Facultad.Funciones.CheckAge()">
+            <input type="number" class="form-control" name="edad" id="edad" onfocus="$('#edadGroup').removeClass('has-danger')" onblur="SP.Manejadora.CheckAge()">
             <div id="agfb" class="invalid-feedback">Edad contiene caracteres inválidos.</div>
         </div>
         <div class="form-group col-md-12">
-            <label for="sexo" class="control-label">Sexo: </label>
-            <select name="sexo" class="form-control" id="sexo">
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
+            <label for="horario" class="control-label">Horario: </label>
+            <select name="horario" class="form-control" id="horario">
+                <option value="Mañana">Mañana</option>
+                <option value="Tarde">Tarde</option>
+                <option value="Noche">Noche</option>
             </select>
         </div>
         <div class="btn-group col-md-12" role="group" aria-label="Basic example">
-            <button name="Save" class="btn btn-secondary alta" id="btnSave" onclick="Facultad.Funciones.CheckBeforeSaving()">Cargar</button>
-            <button name="Cancel" class="btn btn-secondary" id="btnCancel" onclick="Facultad.Funciones.ClearForm()">Cancelar</button>
-            <button name="Delete" class="btn btn-secondary btn-danger" id="btnDel" onclick="Facultad.Funciones.Delete()">Eliminar</button>
-            <button name="Clear" class="btn btn-secondary" id="btnClr" onclick="Facultad.Funciones.ClearForm()">Limpiar LocalStorage</button>
+            <button name="Save" class="btn btn-secondary alta" id="btnSave" onclick="SP.Manejadora.CheckBeforeSaving()">Cargar</button>
+            <button name="Cancel" class="btn btn-secondary" id="btnCancel" onclick="SP.Manejadora.ClearForm()">Cancelar</button>
         </div>
     </form>
 </body>

@@ -1,16 +1,16 @@
-var Facultad;
-(function (Facultad) {
+var SP;
+(function (SP) {
     var Persona = /** @class */ (function () {
-        function Persona(id, nombre, apellido) {
-            this.id = id;
+        function Persona(edad, nombre, apellido) {
+            this.edad = edad;
             this.nombre = nombre;
             this.apellido = apellido;
         }
-        Persona.prototype.getID = function () {
-            return this.id;
+        Persona.prototype.getEdad = function () {
+            return this.edad;
         };
-        Persona.prototype.setID = function (id) {
-            this.id = id;
+        Persona.prototype.setEdad = function (edad) {
+            this.edad = edad;
         };
         Persona.prototype.getNombre = function () {
             return this.nombre;
@@ -24,7 +24,10 @@ var Facultad;
         Persona.prototype.setApellido = function (apellido) {
             this.apellido = apellido;
         };
+        Persona.prototype.personaToJSON = function () {
+            return '"nombre":"' + this.getNombre() + '","apellido":"' + this.getApellido() + '","edad":' + this.getEdad() + '"';
+        };
         return Persona;
     }());
-    Facultad.Persona = Persona;
-})(Facultad || (Facultad = {}));
+    SP.Persona = Persona;
+})(SP || (SP = {}));
