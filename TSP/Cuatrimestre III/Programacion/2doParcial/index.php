@@ -3,37 +3,26 @@
     use \Psr\Http\Message\ResponseInterface as Response;
 
     require './vendor/autoload.php';
-    include_once './API/BicicletaAPI.php';
     include_once './API/TokenAPI.php';
-    include_once './API/VentaAPI.php';
+    include_once './API/CompraAPI.php';
     include_once './Middleware/TokenMiddleware.php';
     include_once './Middleware/HistorialMiddleware.php';
 
     $app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
 
-    $app->post('/crearUsuario[/]', \TokenAPI::class.':CrearUsuario')
-    ->add(\HistorialMiddleware::class.':GenerarHistorial');
-
-    $app->post('/login[/]', \TokenAPI::class.':GenerarToken')
-    ->add(\HistorialMiddleware::class.':GenerarHistorial');  
-
-    $app->get('/bicicletas[/]', \BicicletaAPI::class.':TraerTodos')
-    ->add(\HistorialMiddleware::class.':GenerarHistorial');
-
-    $app->post('/bicicletas[/]', \BicicletaAPI::class.':Cargar')
-    ->add(\HistorialMiddleware::class.':GenerarHistorial')
+    $app->post('/usuario[/]', \TokenAPI::class.':CrearUsuario');
+    $app->get('/usuario[/]', \TokenAPI::class.':TraerTodosLosUsuarios')
     ->add(\TokenMiddleware::class.':ValidarAdmin')
-    ->add(\TokenMiddleware::class.':ValidarToken'); 
+    ->add(\TokenMiddleware::class.':ValidarToken');
 
-    $app->get('/ventas[/]', \VentaAPI::class.':TraerComprasUsuario')
-    ->add(\HistorialMiddleware::class.':GenerarHistorial')
-    ->add(\TokenMiddleware::class.':ValidarUsuario')
-    ->add(\TokenMiddleware::class.':ValidarToken'); 
+    $app->post('/login[/]', \TokenAPI::class.':GenerarToken');
 
-    $app->post('/ventas[/]', \VentaAPI::class.':TraerTodos')
+    $app->post('/compra[/]', \CompraAPI::class.':Comprar')
     ->add(\HistorialMiddleware::class.':GenerarHistorial')
-    ->add(\TokenMiddleware::class.':ValidarAdmin')
-    ->add(\TokenMiddleware::class.':ValidarToken'); 
+    ->add(\TokenMiddleware::class.':ValidarToken');
+
+    $app->get('/compras[/]', \CompraAPI::class.':TraerTodos')
+    ->add(\TokenMiddleware::class.':ValidarToken');
 
     $app->run();
 ?>

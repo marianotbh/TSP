@@ -17,7 +17,7 @@
             if($payload->tipoUser == "admin") {
                 return $next($request, $response);
             } else {
-                $newResponse = $response->withJson("Solo un admin puede realizar esta accion.", 200);
+                $newResponse = $response->withJson("Hola.", 200);
                 return $newResponse;
             }
         }

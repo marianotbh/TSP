@@ -4,11 +4,12 @@
     class TokenApi extends Token {
         public function GenerarToken($request, $response, $args) {
             $parametros = $request->getParsedBody();
-            $user = $parametros["nombre"];
-            $password  = $parametros["clave"];
-            $usuario = Usuario::Login($user, $password)[0];
-            if($usuario->tipo_usuario != ""){
-                $token = Token::CodificarToken($user, $usuario->tipo_usuario, $usuario->id);
+            $nombre = $parametros["nombre"];
+            $clave  = $parametros["clave"];
+            $sexo = $parametros["sexo"];
+            $usuario = Usuario::Login($nombre, $clave, $sexo)[0];
+            if($usuario != null && $usuario->perfil != ""){
+                $token = Token::CodificarToken($nombre, $usuario->perfil, $usuario->clave);
                 $respuesta = array("Estado" => "OK", "Mensaje" => "OK", "Token" => $token);
             }
             else{
@@ -20,12 +21,19 @@
 
         public function CrearUsuario($request, $response, $args) {
             $parametros = $request->getParsedBody();
-            $user = $parametros["nombre"];
-            $password  = $parametros["clave"];
-            $nivel = $parametros["nivel"];
-            Usuario::Insertar($user, $password, $nivel);
+            $nombre = $parametros["nombre"];
+            $clave  = $parametros["clave"];
+            $perfil = $parametros["perfil"];
+            $sexo = $parametros["sexo"];
+            Usuario::Insertar($nombre, $clave, $perfil, $sexo);
             $respuesta = "Insertado Correctamente.";
             $newResponse = $response->withJson($respuesta, 200);
+            return $newResponse;
+        }
+
+        public function TraerTodosLosUsuarios($request, $response, $args) {
+            $todos = Usuario::ConsultarTodos();
+            $newResponse = $response->withJson($todos, 200);
             return $newResponse;
         }
     }
